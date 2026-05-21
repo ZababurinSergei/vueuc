@@ -438,17 +438,19 @@ export default defineComponent({
       },
       keyToIndex: keyIndexMapRef,
       itemsStyle: computed(() => {
-        const { itemResizable } = props
+        const { itemResizable, itemsStyle } = props
         const height = pxfy(finweckTreeRef.value.sum())
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         finweckTreeUpdateTrigger.value
+        // minHeight: itemResizable ? height : '',
+        console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^', itemResizable, itemsStyle.minHeight)
         return [
           props.itemsStyle,
           {
             boxSizing: 'content-box',
             width: pxfy(totalWidthRef.value),
             height: itemResizable ? '' : height,
-            minHeight: itemResizable ? height : '',
+            minHeight: itemsStyle.minHeight ? itemsStyle.minHeight : itemResizable ? height : '',
             paddingTop: pxfy(props.paddingTop),
             paddingBottom: pxfy(props.paddingBottom)
           }
